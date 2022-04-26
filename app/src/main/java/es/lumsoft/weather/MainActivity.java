@@ -73,44 +73,54 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
 
+                    //Agafem l aresposta i la parsejem a JSONObject
                     JSONObject jsonResposta = new JSONObject(response);
-                    JSONArray jsonArray = jsonResposta.getJSONArray("weather");
 
+                    //Agafem les dades del clima
+                    JSONArray jsonArray = jsonResposta.getJSONArray("weather");
                     JSONObject jsonObjectClima = jsonArray.getJSONObject(0);
                     String descripcio = jsonObjectClima.getString("description");
 
+                    //Agafem les dades principals
                     JSONObject jsonObjectMain = jsonResposta.getJSONObject("main");
                     double temperatura = jsonObjectMain.getDouble("temp") - 273.15;
                     double sensacio = jsonObjectMain.getDouble("feels_like") - 273.15;
                     float presio = jsonObjectMain.getInt("pressure");
                     int humitat = jsonObjectMain.getInt("humidity");
 
+                    //Agafem les dades del vent
                     JSONObject jsonObjectVent = jsonResposta.getJSONObject("wind");
-                    String vent = jsonObjectVent.getString("speed");
+                    String velocitat = jsonObjectVent.getString("speed");
 
+                    //Agafem les dades del nubols
                     JSONObject jsonObjectNubols = jsonResposta.getJSONObject("clouds");
                     String nubols = jsonObjectNubols.getString("all");
 
+                    //Agafem les dades del sistema
                     JSONObject jsonObjectSys = jsonResposta.getJSONObject("sys");
                     String nomPais = jsonObjectSys.getString("country");
                     String nomCiutat = jsonResposta.getString("name");
 
+                    //Posem el text de color negre
                     tvInfoCiutat.setTextColor(Color.BLACK);
 
+                    //creem el string resultant
                     output += "Clima actual de " + nomCiutat + " (" + nomPais + ")"
                             + "\n Temperatura: " + df.format(temperatura) + " °C"
                             + "\n Sensació termica: " + df.format(sensacio) + " °C"
                             + "\n Humitat: " + humitat + "%"
-                            + "\n Descripciṕ: " + descripcio
-                            + "\n vent: " + vent + "m/s (metres per segon)"
+                            + "\n Descripció: " + descripcio
+                            + "\n vent: " + velocitat + "m/s (metres per segon)"
                             + "\n Nubols: " + nubols + "%"
                             + "\n Presió: " + presio + " hPa";
 
+                    //Mostrem el resultat
                     tvInfoCiutat.setVisibility(View.VISIBLE);
                     tvInfoCiutat.setText(output);
                 } catch (JSONException e) {
 
                     e.printStackTrace();
+                    tvInfoCiutat.setVisibility(View.GONE);
 
                 }
 
