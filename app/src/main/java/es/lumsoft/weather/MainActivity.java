@@ -106,13 +106,13 @@ public class MainActivity extends AppCompatActivity {
 
                     //creem el string resultant
                     output += "Clima actual de " + nomCiutat + " (" + nomPais + ")"
-                            + "\n Temperatura: " + df.format(temperatura) + " °C"
-                            + "\n Sensació termica: " + df.format(sensacio) + " °C"
-                            + "\n Humitat: " + humitat + "%"
-                            + "\n Descripció: " + descripcio
-                            + "\n vent: " + velocitat + "m/s (metres per segon)"
-                            + "\n Nubols: " + nubols + "%"
-                            + "\n Presió: " + presio + " hPa";
+                            + "\nTemperatura: " + df.format(temperatura) + " °C"
+                            + "\nSensació termica: " + df.format(sensacio) + " °C"
+                            + "\nHumitat: " + humitat + "%"
+                            + "\nDescripció: " + descripcio
+                            + "\nVent: " + velocitat + "m/s (metres per segon)"
+                            + "\nNubols: " + nubols + "%"
+                            + "\nPresió: " + presio + " hPa";
 
                     //Mostrem el resultat
                     tvInfoCiutat.setVisibility(View.VISIBLE);
@@ -124,9 +124,9 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
-            }, error -> Toast.makeText(getApplicationContext(), error.toString().trim(), Toast.LENGTH_SHORT).show());
+            }, error -> Toast.makeText(buscar.getContext(), "No s'ha trobat la ciutat!", Toast.LENGTH_SHORT).show());
 
-            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            RequestQueue requestQueue = Volley.newRequestQueue(buscar.getContext());
             requestQueue.add(stringRequest);
 
         }
